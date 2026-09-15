@@ -1,0 +1,11 @@
+{
+  "maxLogitError": 0.000005652392541577456,
+  "maxCacheError": 0,
+  "maxProbabilitySumError": 6.661338147750939e-16,
+  "browserChecksCorrect": 96,
+  "browserChecksTotal": 96,
+  "weightsUnchanged": true,
+  "browserRuntimeErrors": 0,
+  "externalRequests": 0,
+  "uiChecks": "Presets, edited context, masking, head selection, KV display, layer stepping, learned EOS, sampling, context length, playback, mobile layout, full screen"
+}

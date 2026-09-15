@@ -1,0 +1,35 @@
+"""Build the self-contained engineering lab and Worker from the same checkpoint."""
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+payload = json.loads((ROOT / 'dog-model.json').read_text())
+
+
+def compact(v):
+    if isinstance(v, float):
+        return round(v, 8)
+    if isinstance(v, list):
+        return [compact(x) for x in v]
+    if isinstance(v, dict):
+        return {k: compact(x) for k, x in v.items()}
+    return v
+
+
+model_code = 'const MODEL = ' + json.dumps(compact(payload), separators=(',', ':')) + ';'
+engine = (ROOT / 'dog-engine.js').read_text()
+core = (ROOT / 'engineering-core.js').read_text()
+ui = (ROOT / 'engineering-ui.js').read_text()
+html = (ROOT / 'engineering.template.html').read_text()
+for marker, source in [('ENGINEERING_CSS', (ROOT / 'engineering.css').read_text()), ('MODEL_PAYLOAD', model_code), ('MODEL_ENGINE', engine), ('ENGINEERING_CORE', core), ('ENGINEERING_UI', ui)]:
+    html = html.replace('/* ' + marker + ' */', source)
+(ROOT / 'index.html').write_text(html)
+worker = (ROOT / 'api-worker.template.js').read_text()
+worker = worker.replace('/* ENGINE_BUNDLE */', engine + '\n' + core)
+worker = worker.replace('/* PAYLOAD_BUNDLE */', model_code)
+worker = worker.replace('/* PAGE_BUNDLE */', 'const PAGE = ' + json.dumps(html) + ';')
+server = ROOT / 'dist/server'
+server.mkdir(parents=True, exist_ok=True)
+(server / 'index.js').write_text(worker)
+(server / 'package.json').write_text('{"type":"module"}\n')
+print(f'Built browser page: {len(html.encode()):,} bytes; Worker: {len(worker.encode()):,} bytes.')

@@ -1,0 +1,10 @@
+{
+  "name": "name-recall-engineering-lab",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "python3 build_engineering.py",
+    "dev": "node dev-server.mjs",
+    "test": "node verify-engineering.cjs"
+  }
+}

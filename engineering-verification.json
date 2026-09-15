@@ -1,0 +1,17 @@
+{
+  "cache": {
+    "cachedWork": 115,
+    "uncachedWork": 225,
+    "identicalOutput": true
+  },
+  "nameChecks": 96,
+  "decoding": "80 temperature/top-k/top-p combinations, known nucleus filter, seed reproducibility, validation",
+  "internals": {
+    "tensorCount": 65,
+    "scalarCount": 48352,
+    "unchangedWeights": true,
+    "attentionParity": true
+  },
+  "api": "HTTP route, health, prediction, invalid method/body/settings/origin, isolated concurrent requests",
+  "sourceContract": "JavaScript syntax, unique IDs, referenced elements, parameter explanations, complete bundled output"
+}
