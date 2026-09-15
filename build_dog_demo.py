@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-only
 """Bundle the trained weights, pure JavaScript inference, and UI into one HTML file."""
 import json
 from pathlib import Path

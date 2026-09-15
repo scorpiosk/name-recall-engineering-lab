@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 /* Shared by the browser, local server, and deployed Worker. */
 (function(root){
 'use strict';

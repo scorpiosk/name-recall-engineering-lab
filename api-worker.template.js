@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 /* Browser and API execute the same checkpoint and arithmetic. */
 /* ENGINE_BUNDLE */
 /* PAYLOAD_BUNDLE */

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import http from 'node:http';
 import { fileURLToPath } from 'node:url';
 import { stat } from 'node:fs/promises';

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-only
 """Build the self-contained engineering lab and Worker from the same checkpoint."""
 import json
 from pathlib import Path

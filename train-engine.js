@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 /* Full-gradient CPU training of the same five-block transformer. No fitted-answer rules. */
 (function(root){
 'use strict';

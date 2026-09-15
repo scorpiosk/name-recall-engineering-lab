@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-only
 """Train and export a real five-block causal transformer for contextual name recall.
 
 Local synthetic data only. Browser inference has no answer lookup or name extraction.

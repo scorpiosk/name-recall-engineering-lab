@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 (()=>{
 'use strict';
 const $=id=>document.getElementById(id),C=EngineeringCore,E=DogModelEngine,T=TrainingEngine;

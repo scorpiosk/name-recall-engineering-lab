@@ -1,5 +1,7 @@
 # Name Recall Engineering Lab
 
+[Live interactive demo](https://name-recall-engineering-lab.apon-2369.chatgpt.site) · [Source repository](https://github.com/scorpiosk/name-recall-engineering-lab) · [GPL-3.0 license](LICENSE)
+
 An interactive engineering walkthrough of a **real trained five-block causal transformer**. Open `index.html` for self-contained browser inference, or run the local server to use the prediction API as well.
 
 ## Run
@@ -72,3 +74,13 @@ npm test
 A feature-detected `document.modelContext` tool, `run_name_prediction`, uses the same local Playground action. Its supported-browser WebMCP registration/execution contract has not been verified in this environment; this optional capability is not required for the ordinary interface or API.
 
 The earlier scripted explainer remains in `explorer.html`. The prior five-layer template and browser checks are retained as historical source; `build_dog_demo.py` would replace the current entry point with that older demo, so use `build_engineering.py` for this lab.
+
+## License
+
+Copyright (C) 2026 Sandip Kumar and contributors.
+
+This project is licensed under the GNU General Public License, version 3 only (`GPL-3.0-only`). See [LICENSE](LICENSE) for the full text. The project source, synthetic lesson data, and included model checkpoints are provided under this license. External dependencies retain their own licenses.
+
+## Hosting a fork
+
+The public demo is hosted on Sites. The `.openai/hosting.json` in this repository identifies that original deployment; register your own Site and replace its project ID before deploying a fork. Source repository credentials are never stored in this project. Local browser training and the development server work without Sites credentials.

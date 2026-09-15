@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 /* Five-block trained decoder inference. No domain-specific answer logic. */
 (function (root) {
   'use strict';

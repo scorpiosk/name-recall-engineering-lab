@@ -6,5 +6,11 @@
     "build": "python3 build_engineering.py",
     "dev": "node dev-server.mjs",
     "test": "node verify-engineering.cjs && node verify-training.cjs"
-  }
+  },
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scorpiosk/name-recall-engineering-lab.git"
+  },
+  "homepage": "https://name-recall-engineering-lab.apon-2369.chatgpt.site"
 }

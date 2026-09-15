@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-only
 """Check the browser trainer's full backward pass against independent PyTorch autograd."""
 import json
 import subprocess

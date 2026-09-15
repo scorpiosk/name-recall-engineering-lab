@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 /* Runs locally in a dedicated browser Worker so training never locks the page. */
 let trainer=null,running=false,generation=0,remaining=0,options={},evaluation=null,loopVersion=0,plannedSteps=0,completedSteps=0;
 function snapshot(type='snapshot'){
