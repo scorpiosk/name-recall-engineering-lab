@@ -11,6 +11,18 @@ npm run dev
 
 Open http://127.0.0.1:8766/. No npm dependencies or external model service are required. Building needs Python 3; serving and validation need a modern Node.js with the Fetch API.
 
+## Train and infer side by side
+
+The opening **Train & infer** studio creates an independent random checkpoint in a local browser Web Worker. **Reset weights** reinitializes all matrices with normal standard deviation 0.02, normalization scales with 1, and biases with 0; it also clears AdamW moments, gradients, sampling state, and the log.
+
+**Train model** performs actual forward passes, cross-entropy loss, backpropagation through all five blocks, global-norm clipping, and AdamW updates. The default classroom run uses 44 training prompts, four known names, batches of 16, and 600 updates. Its cosine schedule decreases the selected peak learning rate to 10% during each run. **1 step** uses the selected peak rate. Pausing preserves the model and optimizer; another run adds the selected number of updates with a fresh schedule.
+
+The right panel uses the latest checkpoint every five updates. It performs greedy inference at temperature 1, with no top-k/top-p filtering and a four-token output limit. **Freeze checkpoint** preserves a copy for inference comparison while live training continues. **Load trained example** restores the original pretrained weights into the studio with a new optimizer. Other engineering tabs and the server API continue to use the original reference checkpoint, as identified in their banner.
+
+The artifact sidebar opens actual dataset pairs, tokenizer IDs, architecture, weights, gradients and optimizer moments, per-step logs, evaluation results, portable checkpoints, inference traces, and KV cache contents. Weight/gradient matrices have clickable heatmaps. Downloads preserve artifact snapshots; state is otherwise session-local and is lost on reload.
+
+The lesson has 16 held-out wording/order combinations. At seed 1337 with the default settings, the measured run answered all 16 correctly. This small test contains names seen during training and does not establish broad language ability. Results can change with the seed or hyperparameters.
+
 ## Explore
 
 - **Playground:** edit the dog's name, swap the cat distractor, remove the dog fact, replay all five blocks, and inspect predictions and attention.
@@ -55,7 +67,7 @@ npm test
 
 ## Validation
 
-`npm test` checks 96 known-name/order/distractor/absence cases, seeded sampling, 80 decoding combinations, filter normalization, full-prefix/cache equivalence, causal attention calculations, all tensor shapes/counts, unchanged weights, Worker routing, API validation, concurrent request isolation, and HTML/JavaScript source contracts. Results are in `engineering-verification.json`. These checks do not constitute visual browser QA.
+`npm test` checks 96 known-name/order/distractor/absence cases, seeded sampling, 80 decoding combinations, filter normalization, full-prefix/cache equivalence, causal attention calculations, all tensor shapes/counts, unchanged weights, Worker routing, API validation, concurrent request isolation, and HTML/JavaScript source contracts. Results are in `engineering-verification.json`. `verify-training.cjs` additionally validates full-gradient training, finite differences, a complete 600-step lesson, deterministic reset, frozen checkpoint stability, and Worker messages (including reset during training). It writes `training-studio-verification.json`. Run `.venv/bin/python verify-training-pytorch.py` to independently compare every gradient tensor with PyTorch autograd; its report is `training-gradient-verification.json`. These checks do not constitute visual browser QA.
 
 A feature-detected `document.modelContext` tool, `run_name_prediction`, uses the same local Playground action. Its supported-browser WebMCP registration/execution contract has not been verified in this environment; this optional capability is not required for the ordinary interface or API.
 

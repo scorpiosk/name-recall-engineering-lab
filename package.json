@@ -5,6 +5,6 @@
   "scripts": {
     "build": "python3 build_engineering.py",
     "dev": "node dev-server.mjs",
-    "test": "node verify-engineering.cjs"
+    "test": "node verify-engineering.cjs && node verify-training.cjs"
   }
 }

@@ -1,0 +1,146 @@
+{
+  "training": {
+    "steps": 600,
+    "batchSize": 16,
+    "schedule": "Cosine 0.003 to 0.0003",
+    "heldout": {
+      "step": 600,
+      "correct": 16,
+      "total": 16,
+      "rows": [
+        {
+          "context": "My cat is named Luna. My dog is called Milo.",
+          "target": "Milo",
+          "prediction": "Milo",
+          "correct": true,
+          "probability": 0.9845913600871469
+        },
+        {
+          "context": "My dog is called Milo. My cat is named Max.",
+          "target": "Milo",
+          "prediction": "Milo",
+          "correct": true,
+          "probability": 0.9851503917922046
+        },
+        {
+          "context": "My cat is named Bella. My dog is called Milo.",
+          "target": "Milo",
+          "prediction": "Milo",
+          "correct": true,
+          "probability": 0.984439771497102
+        },
+        {
+          "context": "My cat is named Milo. My dog is called Luna.",
+          "target": "Luna",
+          "prediction": "Luna",
+          "correct": true,
+          "probability": 0.9903539530671189
+        },
+        {
+          "context": "My cat is named Max. My dog is called Luna.",
+          "target": "Luna",
+          "prediction": "Luna",
+          "correct": true,
+          "probability": 0.9892025320797309
+        },
+        {
+          "context": "My dog is called Luna. My cat is named Bella.",
+          "target": "Luna",
+          "prediction": "Luna",
+          "correct": true,
+          "probability": 0.9915282306955349
+        },
+        {
+          "context": "My dog is called Max. My cat is named Milo.",
+          "target": "Max",
+          "prediction": "Max",
+          "correct": true,
+          "probability": 0.9821658140789841
+        },
+        {
+          "context": "My cat is named Luna. My dog is called Max.",
+          "target": "Max",
+          "prediction": "Max",
+          "correct": true,
+          "probability": 0.9819545300379106
+        },
+        {
+          "context": "My cat is named Bella. My dog is called Max.",
+          "target": "Max",
+          "prediction": "Max",
+          "correct": true,
+          "probability": 0.9812424584729936
+        },
+        {
+          "context": "My cat is named Milo. My dog is called Bella.",
+          "target": "Bella",
+          "prediction": "Bella",
+          "correct": true,
+          "probability": 0.9921281235658663
+        },
+        {
+          "context": "My dog is called Bella. My cat is named Luna.",
+          "target": "Bella",
+          "prediction": "Bella",
+          "correct": true,
+          "probability": 0.9926978236582218
+        },
+        {
+          "context": "My cat is named Max. My dog is called Bella.",
+          "target": "Bella",
+          "prediction": "Bella",
+          "correct": true,
+          "probability": 0.9883282653791085
+        },
+        {
+          "context": "My cat is called Milo.",
+          "target": "unknown",
+          "prediction": "unknown",
+          "correct": true,
+          "probability": 0.9412767477702886
+        },
+        {
+          "context": "My cat is called Luna.",
+          "target": "unknown",
+          "prediction": "unknown",
+          "correct": true,
+          "probability": 0.9581535415390823
+        },
+        {
+          "context": "My cat is called Max.",
+          "target": "unknown",
+          "prediction": "unknown",
+          "correct": true,
+          "probability": 0.9287270113482977
+        },
+        {
+          "context": "My cat is called Bella.",
+          "target": "unknown",
+          "prediction": "unknown",
+          "correct": true,
+          "probability": 0.9251616162474667
+        }
+      ]
+    },
+    "initialTargetProbability": 0.018873792818677605,
+    "trainedTargetProbability": 0.9851931029478427,
+    "lossAt600": 0.006234427957617377,
+    "predictions": {
+      "default": "Milo",
+      "swap": "Luna",
+      "missing": "unknown"
+    },
+    "elapsedSeconds": 20.361982291,
+    "allFiveBlocksChanged": true,
+    "originalCheckpointUnchanged": true,
+    "frozenCheckpointStable": true,
+    "resetDeterministic": true
+  },
+  "gradients": {
+    "finiteDifferenceMaxError": 8.639406967603236e-10,
+    "checkedOperations": 7,
+    "independentInferenceParity": true
+  },
+  "worker": "Initialize, one-step training, optimizer artifact, reset during a scheduled run, stale message isolation, invalid-step rejection",
+  "validationScope": "Numerical and Worker protocol checks; no visual browser QA"
+}

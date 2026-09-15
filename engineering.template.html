@@ -2,12 +2,14 @@
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><meta name="description" content="An interactive engineering lab for a real trained five-layer transformer: inference parameters, tensors, attention, training and a deployed prediction API."><title>Model Lab — from token to deployment</title><style>/* ENGINEERING_CSS */</style></head>
 <body>
-<div class="app">
-  <header class="topbar"><a href="#" class="brand" aria-label="Model Lab home"><span class="brand-mark" aria-hidden="true">M<span>↗</span></span><div>MODEL LAB<small>A SMALL MODEL, FULLY EXPOSED</small></div></a><div class="top-actions"><span class="status-tag"><i></i>48,352 trained parameters</span><button class="button quiet" id="present">Present ↗</button></div></header>
-  <div class="intro"><div><span class="eyebrow">THE ENGINEER’S FIELD GUIDE</span><h1>From token to deployment.</h1><p>Run the model. Follow its numbers. Understand every setting.</p></div><div class="checkpoint"><span class="checkpoint-dot"></span><div><strong>Name recall · v1</strong><small>5 blocks / 4 heads / 32 dimensions</small></div><button class="info" data-help="scope" aria-label="Explain this model’s scope">?</button></div></div>
-  <nav class="view-nav" role="tablist" aria-label="Engineering lab sections"><button class="view-tab" id="tab-playground" data-view="playground" role="tab" aria-controls="view-playground" aria-selected="true"><span>01</span> Playground</button><button class="view-tab" id="tab-internals" data-view="internals" role="tab" aria-controls="view-internals" aria-selected="false"><span>02</span> Model internals</button><button class="view-tab" id="tab-training" data-view="training" role="tab" aria-controls="view-training" aria-selected="false"><span>03</span> Training & weights</button><button class="view-tab" id="tab-deployment" data-view="deployment" role="tab" aria-controls="view-deployment" aria-selected="false"><span>04</span> Deployment</button></nav>
+<div class="app" data-active-view="studio">
+  <header class="topbar"><a href="#" class="brand" aria-label="Model Lab home"><span class="brand-mark" aria-hidden="true">M<span>↗</span></span><div>MODEL LAB<small>A SMALL MODEL, FULLY EXPOSED</small></div></a><div class="top-actions"><span class="status-tag"><i></i>48,352 model parameters</span><button class="button quiet" id="present">Present ↗</button></div></header>
+  <div class="intro"><div><span class="eyebrow">THE ENGINEER’S FIELD GUIDE</span><h1>Train it. Then ask it.</h1><p>Watch learning and inference side by side. Open every artifact.</p></div><div class="checkpoint"><span class="checkpoint-dot"></span><div><strong>Name recall · 5 layers</strong><small>5 blocks / 4 heads / 32 dimensions</small></div><button class="info" data-help="scope" aria-label="Explain this model’s scope">?</button></div></div>
+  <nav class="view-nav" role="tablist" aria-label="Engineering lab sections"><button class="view-tab" id="tab-studio" data-view="studio" role="tab" aria-controls="view-studio" aria-selected="true"><span>↔</span> Train & infer</button><button class="view-tab" id="tab-playground" data-view="playground" role="tab" aria-controls="view-playground" aria-selected="false"><span>01</span> Reference playground</button><button class="view-tab" id="tab-internals" data-view="internals" role="tab" aria-controls="view-internals" aria-selected="false"><span>02</span> Model internals</button><button class="view-tab" id="tab-training" data-view="training" role="tab" aria-controls="view-training" aria-selected="false"><span>03</span> Original training</button><button class="view-tab" id="tab-deployment" data-view="deployment" role="tab" aria-controls="view-deployment" aria-selected="false"><span>04</span> Deployment</button></nav>
   <main>
-    <section id="view-playground" role="tabpanel" aria-labelledby="tab-playground">
+<p id="reference-note" class="reference-note" hidden>Reference checkpoint · These views use the original trained model. The Train &amp; infer studio has its own live checkpoint.</p>
+<!-- TRAINING_STUDIO -->
+    <section id="view-playground" role="tabpanel" aria-labelledby="tab-playground" hidden>
       <div class="playground-grid">
         <aside class="panel input-panel"><div class="panel-heading"><h2>01 / Input & controls</h2><button class="info" data-help="context" aria-label="Explain context">?</button></div><div class="panel-content">
           <label class="field-label" for="context">Conversation context</label><textarea id="context" rows="3" spellcheck="false">My dog is named Milo. My cat is named Luna.</textarea><div class="input-status" id="input-status" role="status"></div><div class="question"><small>USER QUESTION</small><p>What is my dog’s name?</p></div><div class="preset-row"><button class="chip" data-preset="swap">Swap names</button><button class="chip" data-preset="missing">Remove dog fact</button><button class="chip" data-preset="reset">Reset example</button></div>
@@ -53,5 +55,8 @@ python3 build_engineering.py</code></pre></div>
 <script>/* MODEL_PAYLOAD */
 /* MODEL_ENGINE */
 /* ENGINEERING_CORE */
-/* ENGINEERING_UI */</script>
+/* ENGINEERING_UI */
+/* TRAINING_ENGINE */
+/* TRAINING_WORKER */
+/* STUDIO_UI */</script>
 </body></html>
