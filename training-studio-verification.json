@@ -124,20 +124,20 @@
     },
     "initialTargetProbability": 0.018873792818677605,
     "trainedTargetProbability": 0.9851931029478427,
-    "lossAt600": 0.006234427957617377,
+    "lossAt600": 0.006234427957617333,
     "predictions": {
       "default": "Milo",
       "swap": "Luna",
       "missing": "unknown"
     },
-    "elapsedSeconds": 20.255173625,
+    "elapsedSeconds": 21.363560084,
     "allFiveBlocksChanged": true,
     "originalCheckpointUnchanged": true,
     "frozenCheckpointStable": true,
     "resetDeterministic": true
   },
   "gradients": {
-    "finiteDifferenceMaxError": 8.639406967603236e-10,
+    "finiteDifferenceMaxError": 8.417362362678205e-10,
     "checkedOperations": 7,
     "independentInferenceParity": true
   },

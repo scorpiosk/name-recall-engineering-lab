@@ -1,0 +1,20 @@
+{
+  "gradients": {
+    "objectives": 3,
+    "lossFiniteDifferenceMaxError": 2.8589242084819944e-11,
+    "multiTokenReluNetworkMaxError": 6.860034762468104e-11
+  },
+  "initialization": "Four deterministic modes; fan scaling, bias/norm defaults, seed changes, and zero-matrix symmetry failure",
+  "optimizers": "SGD, momentum and AdamW match independent update equations across two clipped updates with decoupled decay",
+  "configuration": "Variable depth/head inference parity, train-only vocabulary growth, invalid materials/settings, conflict warnings and schedule endpoints",
+  "customLearning": {
+    "steps": 250,
+    "batchSize": 4,
+    "loss": 0.002886814846405332,
+    "vocabularySize": 63,
+    "predictions": [
+      "silver lantern",
+      "golden compass"
+    ]
+  }
+}

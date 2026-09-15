@@ -5,7 +5,7 @@
   "scripts": {
     "build": "python3 build_engineering.py",
     "dev": "node dev-server.mjs",
-    "test": "node verify-engineering.cjs && node verify-training.cjs"
+    "test": "node verify-engineering.cjs && node verify-training.cjs && node verify-experiments.cjs"
   },
   "license": "GPL-3.0-only",
   "repository": {

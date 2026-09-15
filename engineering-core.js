@@ -6,7 +6,7 @@ const E=typeof module!=='undefined'&&module.exports?require('./dog-engine.js'):r
 const DEFAULTS={temperature:1,topK:0,topP:1,maxTokens:4,seed:42,mode:'greedy',useCache:true};
 function settings(input={}){
  const s={...DEFAULTS,...input};
- for(const [key,min,max,integer] of [['temperature',0,2,false],['topK',0,55,true],['topP',.05,1,false],['maxTokens',1,8,true],['seed',0,4294967295,true]]){
+ for(const [key,min,max,integer] of [['temperature',0,2,false],['topK',0,160,true],['topP',.05,1,false],['maxTokens',1,8,true],['seed',0,4294967295,true]]){
   if(typeof s[key]!=='number'||!Number.isFinite(s[key])||s[key]<min||s[key]>max||(integer&&!Number.isInteger(s[key])))throw Error('Invalid '+key+': expected '+(integer?'an integer':'a number')+' from '+min+' to '+max+'.');
  }
  if(!['greedy','sample'].includes(s.mode))throw Error('mode must be greedy or sample.');
@@ -25,8 +25,8 @@ function probabilities(logits,input={}){
 function random(seed){let x=seed>>>0;return()=>{x=(Math.imul(x,1664525)+1013904223)>>>0;return x/4294967296;};}
 function select(logits,distribution,s,rng){if(s.mode==='greedy'||s.temperature===0)return logits.indexOf(Math.max(...logits));let n=rng();for(let i=0;i<distribution.length;i++){n-=distribution[i];if(n<0)return i;}return distribution.lastIndexOf(Math.max(...distribution));}
 function generate(payload,request={}){
- if(typeof request.context!=='string'||request.context.length>4096)throw Error('context must be text, at most 4096 characters.');
- const s=settings(request.settings),question="What is my dog's name?",prompt=[request.context.trim(),question].filter(Boolean).join(' '),model=new E.Transformer(payload),ids=model.encode(prompt);
+ if(typeof(request.prompt??request.context)!=='string'||(request.prompt??request.context).length>4096)throw Error('context must be text, at most 4096 characters.');
+ const s=settings(request.settings),question="What is my dog's name?",prompt=request.prompt!==undefined?request.prompt.trim():[request.context.trim(),question].filter(Boolean).join(' '),model=new E.Transformer(payload),ids=model.encode(prompt);
  if(ids.length+s.maxTokens>model.config.max_length)throw Error('Input plus max new tokens exceeds the 64-position model limit.');
  const started=performance.now(),events=[],inputTokens=['<bos>',...E.tokenize(prompt),'<answer>'];
  let t=performance.now();model.begin(ids);events.push({name:'Embed tokens',ms:performance.now()-t});
@@ -44,7 +44,7 @@ function generate(payload,request={}){
  }
  const decodeMs=performance.now()-decodeStart;
  const trace={tokens:inputTokens,ids,cache:model.cache,readouts,initialLogits};
- return{model:'name-recall-5l',parameters:payload.metadata.parameters,settings:s,text:generated.filter(id=>payload.metadata.vocab[id]!=='<eos>').map(id=>payload.metadata.vocab[id]).join(' '),generated:generationSteps,stop,probabilities:probabilities(initialLogits,s),timings:{prefillMs,decodeMs,totalMs:performance.now()-started},events,usage:{inputTokens:ids.length,outputTokens:generated.length,positionsComputed,layerPositionEvaluations:positionsComputed*5,cachePositions:running.tokens.length,cacheNumbers:running.tokens.length*5*2*32},trace};
+ return{model:payload.metadata.experiment?'classroom-transformer-'+model.config.layers+'l':'name-recall-5l',parameters:payload.metadata.parameters,settings:s,text:generated.filter(id=>payload.metadata.vocab[id]!=='<eos>').map(id=>payload.metadata.vocab[id]).join(' ').replace(/\s+([.,!?;:])/g,'$1'),generated:generationSteps,stop,probabilities:probabilities(initialLogits,s),timings:{prefillMs,decodeMs,totalMs:performance.now()-started},events,usage:{inputTokens:ids.length,outputTokens:generated.length,positionsComputed,layerPositionEvaluations:positionsComputed*model.config.layers,cachePositions:running.tokens.length,cacheNumbers:running.tokens.length*model.config.layers*2*model.config.width},trace};
 }
 function tensorInfo(name,payload){
  const v=payload.weights[name],shape=Array.isArray(v[0])?[v.length,v[0].length]:[v.length],count=shape.reduce((a,b)=>a*b,1),layer=name.match(/^blocks\.(\d+)\./)?.[1];

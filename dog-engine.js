@@ -27,7 +27,7 @@
       this.config = payload.metadata.config;
       this.weights = payload.weights;
       this.vocab = payload.metadata.vocab;
-      this.ids = Object.fromEntries(this.vocab.map((s, i) => [s, i]));
+      this.ids = Object.assign(Object.create(null), Object.fromEntries(this.vocab.map((s, i) => [s, i])));
       this.cache = Array.from({ length: this.config.layers }, () => ({ k: [], v: [], queries: [], attention: [], hidden: [] }));
       this.tokens = [];
       this.hidden = [];
@@ -63,7 +63,7 @@
         }
         let y = add(x, linear(heads, w[prefix + 'proj.weight'], w[prefix + 'proj.bias']));
         const z2 = layerNorm(y, w[prefix + 'ln2.weight'], w[prefix + 'ln2.bias'], this.config.epsilon);
-        const ff = linear(z2, w[prefix + 'fc1.weight'], w[prefix + 'fc1.bias']).map(gelu);
+        const ff = linear(z2, w[prefix + 'fc1.weight'], w[prefix + 'fc1.bias']).map(this.config.activation==='relu'?x=>Math.max(0,x):gelu);
         y = add(y, linear(ff, w[prefix + 'fc2.weight'], w[prefix + 'fc2.bias']));
         c.attention.push(attention); c.hidden.push(y);
         return y;

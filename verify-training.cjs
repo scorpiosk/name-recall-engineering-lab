@@ -24,7 +24,7 @@ async function main(){
  report.gradients={finiteDifferenceMaxError:maxGradientError,checkedOperations:7,independentInferenceParity:true};
  // Exercise the actual worker message handler in a JS worker-like context, without browser automation.
  const messages=[],waiters=[];const scope={performance,setTimeout,clearTimeout,console};scope.self={postMessage:m=>{messages.push(m);for(const w of [...waiters])if(w.check(m)){waiters.splice(waiters.indexOf(w),1);clearTimeout(w.timer);w.resolve(m);}}};vm.createContext(scope);
- for(const name of ['dog-engine.js','train-engine.js','studio-worker.js'])vm.runInContext(fs.readFileSync(name,'utf8'),scope,{filename:name});
+ for(const name of ['dog-engine.js','experiment-config.js','train-engine.js','studio-worker.js'])vm.runInContext(fs.readFileSync(name,'utf8'),scope,{filename:name});
  const send=data=>scope.self.onmessage({data});const until=check=>new Promise((resolve,reject)=>{const w={check,resolve,timer:setTimeout(()=>reject(Error('Worker protocol timeout')),15000)};waiters.push(w)});
  let waiting=until(m=>m.type==='ready');send({type:'initialize',generation:1,payload,seed:1337,randomize:true});let msg=await waiting;assert.equal(msg.step,0);
  waiting=until(m=>m.step===1&&!m.running);send({type:'train',generation:1,steps:1,options:{learningRate:.003,batchSize:8}});msg=await waiting;assert.equal(msg.history.length,1);
